@@ -412,6 +412,7 @@ function resetPassword($email)
 	if (mysqli_num_rows($result) > 0)
 		{
 		$to = $email;
+		$headers.= "From: hallmarkmd@haydentechnology.com\r\n";
 		$headers.= "MIME-Version: 1.0\r\n";
 		$headers.= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 		$subject = "Reset Password";
