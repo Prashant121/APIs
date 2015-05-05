@@ -373,6 +373,37 @@ function editUser($id, $username, $email, $pass)
 	echo json_encode($response);
 	}
 
+	function removeUser($userid){
+		global $conn;
+		$query = "select * from users where id = $userid";
+		$result = mysqli_query($conn, $query) OR die("Error:" . mysqli_error($conn));
+		if (mysqli_num_rows($result) > 0){
+			$query = "delete from users where id = $userid";
+			$result = mysqli_query($conn, $query) OR die("Error:" . mysqli_error($conn));
+			if($result)
+				$response = generateResponse(TRUE, "User successfully deleted");
+			else
+				$response = generateResponse(FALSE, "Unable to delete user. Contact administrator");
+		}
+			else $response = generateResponse(FALSE, "This user doesn't exist anymore");
+		echo json_encode($response);
+	}
+	
+	function removeLocation($locationid){
+		global $conn;
+		$query = "select * from locations where id = $locationid";
+		$result = mysqli_query($conn, $query) OR die("Error:" . mysqli_error($conn));
+		if (mysqli_num_rows($result) > 0){
+			$query = "delete from locations where id = $locationid";
+			$result = mysqli_query($conn, $query) OR die("Error:" . mysqli_error($conn));
+			if($result)
+				$response = generateResponse(TRUE, "Location successfully deleted");
+			else
+				$response = generateResponse(FALSE, "Unable to delete location. Contact administrator");
+		}
+			else $response = generateResponse(FALSE, "This location doesn't exist anymore");
+		echo json_encode($response);
+	}
 function resetPassword($email)
 	{
 	global $conn;
@@ -414,7 +445,7 @@ function changePassword($emailid, $pass)
 	  else $response = generateResponse(FALSE, "Email doesn't exists");
 	echo json_encode($response);
 	}
-
+	
 function addlocation($name, $phone, $email, $clinic, $category_id, $address, $address_line2, $city, $state, $zip, $zipext, $available_hours, $googlemap_url, $picture_url, $website_url, $updated_by, $longitude, $latitude)
 	{
 	global $conn;

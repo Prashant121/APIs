@@ -93,7 +93,14 @@ case "editUser":
 	$pass = $_REQUEST['password'];
 	editUser($id, $username, $email, $pass);
 	break;
-
+case "removeUser":
+	$userid = $_REQUEST['userid'];
+	removeUser($userid);
+	break;
+case "removeLocation":
+	$locationid = $_REQUEST['locationid'];
+	removeLocation($locationid);
+	break;
 case "getnearbylocation":
 	$lat = $_REQUEST['latitude'];
 	$lng = $_REQUEST['longitude'];
